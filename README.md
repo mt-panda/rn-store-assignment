@@ -18,6 +18,10 @@ Modern React Native app built with Expo. Browse products, search and filter by c
 - Reanimated (for splash animation)
 - TypeScript, ESLint
 
+## Demo Video
+
+[Watch on Loom](https://www.loom.com/share/3326995eea814f2db0231c666677aa96?sid=99ee2758-982b-45e1-a672-18b3b2cb2e4a)
+
 ## Screenshots
 
 <div align="center">
