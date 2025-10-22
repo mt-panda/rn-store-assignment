@@ -1,8 +1,58 @@
-# Welcome to your Expo app 👋
+# React Native Assessment
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Modern React Native app built with Expo. Browse products, search and filter by category, view details, and manage favourites. Includes a custom splash flow and polished UI.
 
-## Get started
+## Features
+
+- **Product list** with search and real‑time category filters (`src/screens/Homescreen.tsx`)
+- **Product details** with improved layout and favourite toggle (`src/screens/ProductDetailsScreen.tsx`)
+- **Favourites** screen persisted with AsyncStorage (`src/screens/FavoritesScreen.tsx`, `src/storage/Favourites.ts`)
+- **Startup splash** route that shows for ~3 seconds before navigating to Home (`App.tsx`, `src/screens/SplashScreen.tsx`)
+- TypeScript, ESLint, and React Navigation
+
+## Tech Stack
+
+- React Native, Expo
+- React Navigation (native stack)
+- AsyncStorage
+- Reanimated (for splash animation)
+- TypeScript, ESLint
+
+## Screenshots
+
+<div align="center">
+  <img src="assets/screenshots/Screenshot_1761131188.png" alt="Splash" width="250" />
+  <img src="assets/screenshots/Screenshot_1761131202.png" alt="Home List" width="250" />
+  <img src="assets/screenshots/Screenshot_1761131260.png" alt="Home with Favourites" width="250" />
+  <img src="assets/screenshots/Screenshot_1761131270.png" alt="Product Details" width="250" />
+  <img src="assets/screenshots/Screenshot_1761131267.png" alt="Favourites" width="250" />
+  <img src="assets/screenshots/Screenshot_1761131252.png" alt="Products Filtered" width="250" />
+</div>
+
+## Project Structure
+
+```
+.
+├─ App.tsx                     # Navigation + splash route
+├─ index.js                    # Expo entry (registers App)
+├─ app.json                    # Expo config
+├─ src/
+│  ├─ components/
+│  │  └─ ProductCard.tsx
+│  ├─ screens/
+│  │  ├─ Homescreen.tsx
+│  │  ├─ ProductDetailsScreen.tsx
+│  │  ├─ FavoritesScreen.tsx
+│  │  └─ SplashScreen.tsx
+│  ├─ storage/
+│  │  └─ Favourites.ts
+│  └─ types.ts
+└─ assets/
+   └─ images/
+      └─ splashScreenImage.png
+```
+
+## Getting Started
 
 1. Install dependencies
 
@@ -10,41 +60,43 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    npm install
    ```
 
-2. Start the app
+2. Start Metro and choose a platform
 
    ```bash
-   npx expo start
+   npm run android
+   # or
+   npm run ios
+   # or
+   npm start
    ```
 
-In the output, you'll find options to open the app in a
+3. Open on device/emulator when prompted.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Scripts
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- `npm start` – start Expo dev server
+- `npm run android` – run on Android
+- `npm run ios` – run on iOS
+- `npm run web` – run on web
+- `npm run lint` – run ESLint
 
-## Get a fresh project
+## Splash Behavior
 
-When you're ready, run:
+- Native splash is controlled by `expo-splash-screen` in `app.json`.
+- JS shows a dedicated `Splash` route first, then automatically navigates to `Home` after ~3 seconds.
+- Splash image: `assets/images/splashScreenImage.png`. Update this asset to change the visual.
 
-```bash
-npm run reset-project
-```
+## Favourites Persistence
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+- Stored as a map `Record<number, boolean>` in AsyncStorage under key `FAVORITES_V1`.
+- Helpers in `src/storage/Favourites.ts`: `getFavorites`, `setFavorites`, `toggleFavorite`.
 
-## Learn more
+## Troubleshooting
 
-To learn more about developing your project with Expo, look at the following resources:
+- If splash never hides: ensure `ExpoSplash.hideAsync()` is called in `App.tsx` and the Splash route performs a timed navigation.
+- If images don’t load: check network permissions/emulator connectivity.
+- If the splash image errors, verify the file path/extension and that the asset exists at `assets/images/splashScreenImage.png`.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## License
 
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+This project is for assessment and educational purposes.
